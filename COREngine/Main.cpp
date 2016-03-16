@@ -1,12 +1,31 @@
 #include "Vector2.h"
 #include "Matrix3.h"
+#include "Matrix4.h"
 #include "sfwdraw.h"
+#include "Window.h"
 #include <iostream>
 
 int main()
 {
-	COR::Vec2 a = { 2, 2 };
-	COR::Mat3 b = { 2, 3, 4, 5, 6, 7, 8, 9, 1 };
+	auto &window = Window::instance();
 
+	COR::Vec2 a = { 400, 30 };
+	COR::Vec2 speed = { 30, 0 };
+	COR::Mat3 b = { 2, 3, 4, 5, 6, 7, 8, 9, 1 };
+	COR::Mat4 r = COR::Mat4::identity();
+	
+	window.init();
+
+	while (window.step())
+	{
+		sfw::drawCircle(a.x, a.y, 10, 12U, YELLOW);
+
+		if (sfw::getKey('A'))
+		{
+			a += -( speed * sfw::getDeltaTime());
+		}
+	}
+
+	window.term();
 	return 0;
 }

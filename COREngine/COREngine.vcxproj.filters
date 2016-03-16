@@ -13,15 +13,45 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Components.cpp">
+      <UniqueIdentifier>{eee84d40-b8a3-428c-b187-0c73aee13160}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components.h">
+      <UniqueIdentifier>{4cc2352a-1622-4e37-ac79-3e5c08e4c46f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Systems.h">
+      <UniqueIdentifier>{c37f8d53-de42-40e6-aa06-20561ca42716}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Systems.cpp">
+      <UniqueIdentifier>{2f9b4dd0-c726-4f2b-815e-d138441d1d50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core.h">
+      <UniqueIdentifier>{487bf9c9-510c-40d9-93a0-25c70a01fbd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Core.cpp">
+      <UniqueIdentifier>{39a421b9-7258-4f34-b0eb-6517556a07db}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Source Files\Core.cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SFWRelease\sfwdraw.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Factory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Header Files\Core.h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
