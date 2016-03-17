@@ -118,13 +118,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SFWRelease\sfwdraw.h" />
+    <ClInclude Include="Entity.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="GlobalData.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="Time.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

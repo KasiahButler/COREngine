@@ -3,16 +3,16 @@
 
 class Window
 {
+private:
 	bool isInit;
-	int width, height;
+	unsigned int width, height;
 	Window() : isInit(false) {}
 
 public:
-
 	static Window &instance() { static Window instance; return instance; }
-	bool init(int Width = 800, int Height = 600, const char *Title = "COREngine");
-	bool step();
-	void term();
+	bool init(unsigned int Width = 800, unsigned int Height = 600, const char *Title = "COREngine") { return sfw::initContext(Width, Height, Title); }
+	bool step() { return sfw::stepContext(); }
+	void term() { sfw::termContext(); isInit = false; }
 
 	int getWidth() { return width; }
 	int getHeight() { return height; }

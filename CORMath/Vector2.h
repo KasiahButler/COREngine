@@ -45,9 +45,19 @@ namespace COR
 		return{ lhs.x + rhs, lhs.y + rhs };
 	}
 
+	inline Vec2 operator+(float lhs, const Vec2 &rhs)
+	{
+		return rhs + lhs;
+	}
+
 	inline Vec2 operator-(const Vec2 &lhs, const Vec2 &rhs)
 	{
 		return{ lhs.x - rhs.x, lhs.x - rhs.x };
+	}
+
+	inline Vec2 operator-(float lhs, const Vec2 &rhs)
+	{
+		return rhs + lhs;
 	}
 
 	inline Vec2 operator*(const Vec2 &lhs, const Vec2 &rhs)
