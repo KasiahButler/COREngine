@@ -12,15 +12,14 @@ namespace COR
 
 	CollData CollTest(const Circle &lhs, const Circle &rhs)
 	{
-		CollData cd = { false };
-		float depth = (lhs.radius + rhs.radius) - distance(lhs.position, rhs.position);
+		CollData cd;
+		auto diff = rhs.position - lhs.position;
 
-		if (depth > 0)
-		{
-			Vec2 norm = (lhs.position - rhs.position).normal();
-			cd = { true, depth, norm };
-		}
-		else return cd = { false, depth, (lhs.position - rhs.position).normal() };
+		cd.normal = diff.normal();
+		cd.depth = (rhs.radius + lhs.radius) - diff.magnitude();
+		cd.collision = cd.depth > 0;
+
+		return cd;
 	}
 
 	CollData CollTest(const Circle &lhs, const AABB &rhs)
@@ -160,10 +159,10 @@ namespace COR
 		Vec2 localDist = lhs.position - rhs.position;
 		float rayPlaneTest = (dot(rhs.normal, localDist) / dot(rhs.normal, rLength) * -1);
 
-		if (dot(rhs.normal, rLength) * -1 > 0) { return cd; }
-		else if (rayPlaneTest >= 0 && rayPlaneTest <= lhs.length)
+		if(rayPlaneTest >= 0 && rayPlaneTest <= lhs.length)
 		{
 			return cd = { true, lhs.length - rayPlaneTest, lhs.direction.normal() * -1 };
 		}
+		else { return cd; }
 	}
 }

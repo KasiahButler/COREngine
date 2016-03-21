@@ -5,11 +5,11 @@ bool Input::init()
 {
 	memset(keyRelease, 0, 400);
 	memset(keyPress, 0, 400);
-	memset(mouseRelease, 0, 10);
-	memset(mousePress, 0, 10);
+	memset(mouseRelease, 0, 20);
+	memset(mousePress, 0, 20);
 	mouseX = mouseY = 0;
 
-	return isInit = Window::instance().isInitialized;
+	return isInit = Window::instance().isInitialized();
 }
 
 bool Input::step()
@@ -20,13 +20,13 @@ bool Input::step()
 
 		if (sfw::getKey(i)) keyPress[i] = sfw::getTime();
 		else keyRelease[i] = sfw::getTime();
-	}
 
-	for (unsigned int i = 0; i < 20; ++i)
-	{
-		mouseState[i] = mousePress[i] > mouseRelease[i];
-		if (sfw::getMouseButton(i)) mousePress[i] = sfw::getTime();
-		else mouseRelease[i] = sfw::getTime();
+		if (i < 20)
+		{
+			mouseState[i] = mousePress[i] > mouseRelease[i];
+			if (sfw::getMouseButton(i)) mousePress[i] = sfw::getTime();
+			else mouseRelease[i] = sfw::getTime();
+		}
 	}
 
 	mouseX = sfw::getMouseX();
@@ -54,7 +54,7 @@ bool Input::getMouseButton(unsigned key)
 	return mousePress[key] > mouseRelease[key];
 }
 
-bool Input::getMouseButtonDown(unsigned key)
+bool Input::getMouseButtonPress(unsigned key)
 {
 	return getMouseButton(key) && !mouseState[key];
 }

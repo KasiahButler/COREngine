@@ -28,7 +28,7 @@ public:
 	bool getKeyRelease(unsigned);
 
 	bool getMouseButton(unsigned);
-	bool getMouseButtonDown(unsigned);
+	bool getMouseButtonPress(unsigned);
 	bool getMouseButtonRelease(unsigned);
 
 	float keyDelta(unsigned); //Time between last press and release of a key

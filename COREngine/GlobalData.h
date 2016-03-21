@@ -16,6 +16,9 @@ struct Handle
 
 	T *operator&() { return &GlobalData<T>::at(index); }
 
+	operator int()       { return index; }
+	operator int() const { return index; }
+
 private:
 	std::vector<T> *dataref;
 };
@@ -35,11 +38,11 @@ public:
 
 	static void free(int i)
 	{
-		if (!at(i).isVacant)
+		if (i > -1 && !at(i).isEmpty)
 		{
 			at(i).onFree();
 			getQueue().push(i);
-			at(i).isVacant = true;
+			at(i).isEmpty = true;
 			at(i).index = -1;
 		}
 	}

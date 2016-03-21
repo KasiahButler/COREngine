@@ -118,16 +118,34 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Rigidbody.cpp" />
+    <ClCompile Include="Transform.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SFWRelease\sfwdraw.h" />
+    <ClInclude Include="Assets.h" />
+    <ClInclude Include="Collider.h" />
+    <ClInclude Include="CollisionDetection.h" />
+    <ClInclude Include="CRenderUtilities.h" />
+    <ClInclude Include="DebugDraw.h" />
+    <ClInclude Include="DynamicResolution.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Factory.h" />
     <ClInclude Include="GlobalData.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Lifespan.h" />
+    <ClInclude Include="LifetimeSystem.h" />
+    <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="RenderSystem.h" />
+    <ClInclude Include="Rigidbody.h" />
+    <ClInclude Include="RigidbodyDynamics.h" />
+    <ClInclude Include="Sprite.h" />
+    <ClInclude Include="Systems.h" />
     <ClInclude Include="Time.h" />
+    <ClInclude Include="Transform.h" />
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

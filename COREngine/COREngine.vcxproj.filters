@@ -39,12 +39,18 @@
     <ClCompile Include="Input.cpp">
       <Filter>Source Files\Core.cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Rigidbody.cpp">
+      <Filter>Source Files\Components.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Source Files\Components.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Source Files\Components.cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SFWRelease\sfwdraw.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GlobalData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Factory.h">
@@ -61,6 +67,54 @@
     </ClInclude>
     <ClInclude Include="Time.h">
       <Filter>Header Files\Core.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Header Files\Components.h</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>Header Files\Components.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Lifespan.h">
+      <Filter>Header Files\Components.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Header Files\Components.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Rigidbody.h">
+      <Filter>Header Files\Components.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Header Files\Components.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Assets.h">
+      <Filter>Header Files\Core.h</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionDetection.h">
+      <Filter>Header Files\Systems.h</Filter>
+    </ClInclude>
+    <ClInclude Include="LifetimeSystem.h">
+      <Filter>Header Files\Systems.h</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderSystem.h">
+      <Filter>Header Files\Systems.h</Filter>
+    </ClInclude>
+    <ClInclude Include="RigidbodyDynamics.h">
+      <Filter>Header Files\Systems.h</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugDraw.h">
+      <Filter>Header Files\Systems.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Systems.h">
+      <Filter>Header Files\Systems.h</Filter>
+    </ClInclude>
+    <ClInclude Include="CRenderUtilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalData.h">
+      <Filter>Header Files\Core.h</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicResolution.h">
+      <Filter>Header Files\Systems.h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

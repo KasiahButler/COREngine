@@ -1,1 +1,22 @@
 #pragma once
+#include "Entity.h"
+
+class Factory
+{
+public:
+	static Handle<Entity> makeBall(COR::Vec2 pos, COR::Vec2 vel, float radius, float mass)
+	{
+		auto e = Entity::make();
+		e->collider = Collider::make();
+		e->transform = Transform::make();
+		e->rigidbody = Rigidbody::make();
+
+		e->collider->circle.radius = radius;
+		e->collider->shape = Collider::e_Circle;
+		e->transform->setPosition(pos);
+		e->rigidbody->velocity = vel;
+		e->rigidbody->mass = mass;
+
+		return e;
+	}
+};

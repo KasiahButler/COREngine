@@ -9,11 +9,6 @@
 
 namespace COR
 {
-	//ConvexHull needs work to ensure functionality
-	struct ConvexHull
-	{
-		std::vector<Vec2> verts;
-	};
 	struct Ray
 	{
 		Vec2 position, direction;
@@ -37,12 +32,15 @@ namespace COR
 	inline Vec2 AABB::min() const { return position - halfextents; }
 	inline Vec2 AABB::max() const { return position + halfextents; }
 
-
-	//Useful for taking a gameobject's transform and applying it
-	//to a shape for collision detection
-
 	inline AABB operator*(const Mat3 &m, const AABB &a)
 	{
+		//Vec2 pos = { m[0][0], m[1][1] };
+		//AABB hold;
+
+		//hold.position = { m[0][0], m[1][1] };
+		//hold.halfextents = a.halfextents - a.position;
+
+		//return hold;
 		Vec2 omin = a.min();
 		Vec2 omax = a.max();
 
@@ -91,14 +89,5 @@ namespace COR
 		Vec3 pos{ a.position.x, a.position.y, 1 };
 
 		return{ (m*pos).xy, (m*nor).xy };
-	}
-
-	inline ConvexHull operator*(const Mat3 &m, const ConvexHull &a)
-	{
-		ConvexHull ret;
-		for each(Vec2 p in ret.verts)
-			ret.verts.push_back((m * Vec3{ p.x,p.y,1 }).xy);
-
-		return ret;
 	}
 }

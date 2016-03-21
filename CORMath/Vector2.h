@@ -21,6 +21,7 @@ namespace COR
 		Vec2 &operator+=(const Vec2 &rhs)  { return *this = Vec2{ x + rhs.x, y + rhs.y }; }
 		Vec2 &operator+=(float rhs) { return *this = Vec2{ x + rhs, y + rhs }; }
 		Vec2 &operator-=(const Vec2 &rhs)  { return *this = Vec2{ x - rhs.x, y - rhs.y }; }
+		Vec2 &operator-=(float rhs) { return *this = Vec2{ x - rhs, y - rhs}; }
 		Vec2 &operator*=(float rhs) { return *this = Vec2{ x * rhs, y * rhs }; }
 		Vec2 &operator/=(float rhs) { return *this = Vec2{ x / rhs, y / rhs }; }
 
@@ -52,7 +53,7 @@ namespace COR
 
 	inline Vec2 operator-(const Vec2 &lhs, const Vec2 &rhs)
 	{
-		return{ lhs.x - rhs.x, lhs.x - rhs.x };
+		return{ lhs.x - rhs.x, lhs.y - rhs.y };
 	}
 
 	inline Vec2 operator-(float lhs, const Vec2 &rhs)

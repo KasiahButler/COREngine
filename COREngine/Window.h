@@ -1,6 +1,8 @@
 #pragma once
 #include "sfwdraw.h"
 
+#define WINDOW_INIT (Window::instance().isInitialized);
+
 class Window
 {
 private:

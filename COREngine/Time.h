@@ -15,6 +15,6 @@ public:
 
 	bool isInitialised() { return isInit; }
 
-	inline float getTotalTime() { return sfw::getTime(); }
+	inline float getTime() { return sfw::getTime(); }
 	inline float getDeltaTime() { return sfw::getDeltaTime(); }
 };

@@ -24,4 +24,33 @@ namespace COR
 	CollData CollTest(const AABB &lhs, const Ray &rhs);
 
 	CollData CollTest(const Ray &lhs, const Plane &rhs);
+
+	inline CollData CollTest(const Ray &lhs, const Circle &rhs)
+	{
+		return CollTest(rhs, lhs);
+	}
+	inline CollData CollTest(const Ray &lhs, const AABB &rhs)
+	{
+		return CollTest(rhs, lhs);
+	}
+	inline CollData CollTest(const AABB &lhs, const Circle &rhs)
+	{
+		return CollTest(rhs, lhs);
+	}
+	inline CollData CollTest(const Plane &lhs, const Plane &rhs)
+	{
+		return CollTest(rhs, lhs);
+	}
+	inline CollData CollTest(const Plane &lhs, const Ray &rhs)
+	{
+		return CollTest(rhs, lhs);
+	}
+	inline CollData CollTest(const Plane &lhs, const AABB &rhs)
+	{
+		return CollTest(rhs, lhs);
+	}
+	inline CollData CollTest(const Plane &lhs, const Circle &rhs)
+	{
+		return CollTest(rhs, lhs);
+	}
 }
