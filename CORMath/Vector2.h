@@ -173,4 +173,10 @@ namespace COR
 	{
 		return vmin(max, vmax(a, min));
 	}
+
+	inline Vec2 vsnap(const Vec2 &val, const Vec2 &lower, const Vec2 &upper)
+	{
+		return{ val.x - lower.x < upper.x - val.x ? lower.x : upper.x,
+			    val.y - lower.y < upper.y - val.y ? lower.y : upper.y };
+	}
 }

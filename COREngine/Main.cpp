@@ -9,7 +9,30 @@
 #include "RigidbodyDynamics.h"
 #include "CollisionDetection.h"
 #include "DynamicResolution.h"
+#include "PlayerControlSystem.h"
 #include <iostream>
+
+void drawSquare(const COR::AABB draw)
+{
+	sfw::drawLine(draw.position.x + draw.halfextents.x, draw.position.y + draw.halfextents.y, draw.position.x - draw.halfextents.x, draw.position.y + draw.halfextents.y);
+	sfw::drawLine(draw.position.x + draw.halfextents.x, draw.position.y - draw.halfextents.y, draw.position.x - draw.halfextents.x, draw.position.y - draw.halfextents.y);
+	sfw::drawLine(draw.position.x - draw.halfextents.x, draw.position.y - draw.halfextents.y, draw.position.x - draw.halfextents.x, draw.position.y + draw.halfextents.y);
+	sfw::drawLine(draw.position.x + draw.halfextents.x, draw.position.y + draw.halfextents.y, draw.position.x + draw.halfextents.x, draw.position.y - draw.halfextents.y);
+}
+
+void dSquare(const Handle<Entity> draw)
+{
+	auto d = draw->transform->getPosition();
+	sfw::drawLine(d.x + 20, d.y + 20, d.x - 20, d.y + 20);
+	sfw::drawLine(d.x + 20, d.y - 20, d.x - 20, d.y - 20);
+	sfw::drawLine(d.x - 20, d.y - 20, d.x - 20, d.y + 20);
+	sfw::drawLine(d.x + 20, d.y + 20, d.x + 20, d.y - 20);
+}
+
+void dCircle(const COR::Circle draw)
+{
+	sfw::drawCircle(draw.position.x, draw.position.y, draw.radius);
+}
 
 int main()
 {
@@ -17,32 +40,37 @@ int main()
 	auto &input = Input::instance();
 	auto &time = Time::instance();
 
-	COR::Vec2 a = { 600, 300 };
-	COR::Vec2 speed = { 100, 0 };
-	COR::Mat3 b = { 2, 3, 4, 5, 6, 7, 8, 9, 1 };
-	COR::Mat4 r = COR::Mat4::identity();
-	
-	auto e = Factory::makeBall(a, {0, 0}, 20, 1);
-	auto f = Factory::makeBall({ 500, 300 }, { 20, 0 }, 20, 1);
+	auto e = Factory::makeSquare({ 300, 300 }, { 0, 0 }, {20, 20}, 1);
+	auto f = Factory::makeSquare({ 600, 300 }, { 0, 0 }, { 20, 20 }, 1);
+
+	e->controller = PlayerController::make();
 
 	window.init();
 	input.init();
 	time.init();
 
+	e->rigidbody->addDrag(0);
+
 	RigidbodyDynamics rDynamics;
 	CollDetection cDetect;
 	DynamicResolution dRes;
+	PlayerControlSystem pCon;
 
 	while (window.step())
 	{
 		input.step();
 		time.step();
+
+		pCon.step();
+
 		rDynamics.step();
+
 		cDetect.step();
 		dRes.step();
 
-		sfw::drawCircle(e->transform->getPosition().x, e->transform->getPosition().y, e->collider->circle.radius);
-		sfw::drawCircle(f->transform->getPosition().x, f->transform->getPosition().y, f->collider->circle.radius);
+		dSquare(e);
+		dSquare(f);
+		sfw::drawCircle(f->transform->getPosition().x, f->transform->getPosition().y, f->collider->aabb.halfextents.x);
 	}
 
 	time.term();

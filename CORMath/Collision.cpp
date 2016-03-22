@@ -1,6 +1,7 @@
 #include "Collision.h"
 #include "Defines.h"
 #include "FMath.h"
+#include <utility>
 #include <cmath>
 
 namespace COR
@@ -10,13 +11,25 @@ namespace COR
 		return (dot(plane.normal, (ray.position - plane.position)) / -dot(plane.normal, ray.direction));
 	}
 
+	inline CollData DSAT(float amin, float amax, float bmin, float bmax, Vec2 axis)
+	{
+		float pDr = amax - bmin;
+		float pDl = bmax - amin;
+
+		float pD = std::fminf(pDr, pDl);
+
+		float H = std::copysignf(1, pDr - pDl);
+
+
+		return{ pD > 0, pD, axis*H };
+	}
+
 	CollData CollTest(const Circle &lhs, const Circle &rhs)
 	{
 		CollData cd;
-		auto diff = rhs.position - lhs.position;
 
-		cd.normal = diff.normal();
-		cd.depth = (rhs.radius + lhs.radius) - diff.magnitude();
+		cd.normal = (rhs.position - lhs.position).normal();
+		cd.depth = (rhs.radius + lhs.radius) - (rhs.position - lhs.position).magnitude();
 		cd.collision = cd.depth > 0;
 
 		return cd;
@@ -24,35 +37,12 @@ namespace COR
 
 	CollData CollTest(const Circle &lhs, const AABB &rhs)
 	{
-		CollData cd{ false };
+		Circle sqCirc = { vsnap(lhs.position, rhs.min(), rhs.max()), rhs.halfextents.x / 2 };
+		Circle circ = lhs;
 
-		Vec2 cP = vclamp(lhs.position, rhs.min(), rhs.max());
-
-		if (cP == lhs.position)
-		{
-			Vec2 d{ (cP.x - rhs.min().x < rhs.max().x - cP.x) ? rhs.min().x : rhs.max().x,
-				(cP.y - rhs.min().y < rhs.max().y - cP.y) ? rhs.min().y : rhs.max().y };
-
-			if (abs(d.x - cP.x) < abs(d.y - cP.y))
-			{
-				cP.x = d.x;
-			}
-			else cP.y = d.y;
-		}
-
-		float distSqr = distance(lhs.position, cP) * distance(lhs.position, cP);
-		float radSqr = lhs.radius * lhs.radius;
-
-		if (distSqr < radSqr)
-		{
-			cd.collision = true;
-		}
-
-		cd.depth = lhs.radius - distance(lhs.position, cP);
-
-		cd.normal = (lhs.position - cP).normal();
-
-		return cd;
+		if (rhs.min() < lhs.position && lhs.position < rhs.max()) { std::swap(circ, sqCirc); }
+		
+		return CollTest(circ, sqCirc);
 	}
 
 	CollData CollTest(const Circle &lhs, const Plane &rhs)
@@ -83,26 +73,12 @@ namespace COR
 		return cd;
 	}
 
-	CollData CollTest(const AABB &lhs, const AABB &rhs)
+	CollData CollTest(const AABB &a, const AABB &b)
 	{
-		CollData cd{ false, 0, 0 };
+		auto cdx = DSAT(a.min().x, a.max().x, b.min().x, b.max().x, { 1, 0 });
+		auto cdy = DSAT(a.min().y, a.max().y, b.min().y, b.max().y, { 0, 1 });
 
-		const float up = rhs.min().x - lhs.max().x;
-		const float down = rhs.max().x - lhs.min().x;
-		const float left = rhs.min().y - lhs.max().y;
-		const float right = rhs.max().y - lhs.min().y;
-
-		if (left < 0.0f || right > 0.0f || up < 0.0f || down > 0.0f) cd.collision = true;
-
-		float collX = abs(left) < right ? left : right;
-		float collY = abs(up) < down ? down : up;
-
-		cd.depth = fminf(collX, collY);
-
-		if (collX < collY) { cd.normal = (collX == right ? Vec2 RIGHT : Vec2 LEFT); }
-		else cd.normal = (collY == up ? Vec2 UP : Vec2 DOWN);
-
-		return cd;
+		return cdx.depth < cdy.depth ? cdx : cdy;
 	}
 
 	CollData CollTest(const AABB &lhs, const Plane &rhs)

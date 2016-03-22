@@ -28,7 +28,10 @@ public:
 	{
 		onStep();
 		for each(Collision coll in Collision::getData())
+		{
+			if(condition(coll))
 			update(coll);
+		}
 	}
 };
 

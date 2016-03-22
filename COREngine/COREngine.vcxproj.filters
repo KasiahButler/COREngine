@@ -116,5 +116,8 @@
     <ClInclude Include="DynamicResolution.h">
       <Filter>Header Files\Systems.h</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerControlSystem.h">
+      <Filter>Header Files\Systems.h</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

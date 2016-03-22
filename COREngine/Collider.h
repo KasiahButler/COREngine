@@ -9,8 +9,8 @@ struct Collider : GlobalData<Collider>
 	enum SHAPE{e_Circle = 1, e_AABB = 2, e_Ray = 4, e_Plane = 8} shape;
 	union
 	{
-		COR::Circle circle;
 		COR::AABB aabb;
+		COR::Circle circle;
 		COR::Ray ray;
 		COR::Plane plane;
 	};

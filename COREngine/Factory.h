@@ -19,4 +19,20 @@ public:
 
 		return e;
 	}
+
+	static Handle<Entity> makeSquare(COR::Vec2 pos, COR::Vec2 vel, COR::Vec2 halfextents, float mass)
+	{
+		auto e = Entity::make();
+		e->collider = Collider::make();
+		e->transform = Transform::make();
+		e->rigidbody = Rigidbody::make();
+
+		e->collider->shape = Collider::e_AABB;
+		e->collider->aabb.halfextents = halfextents;
+		e->transform->setPosition(pos);
+		e->rigidbody->velocity = vel;
+		e->rigidbody->mass = mass;
+
+		return e;
+	}
 };

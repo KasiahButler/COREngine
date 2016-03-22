@@ -139,6 +139,7 @@
     <ClInclude Include="Lifespan.h" />
     <ClInclude Include="LifetimeSystem.h" />
     <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="PlayerControlSystem.h" />
     <ClInclude Include="RenderSystem.h" />
     <ClInclude Include="Rigidbody.h" />
     <ClInclude Include="RigidbodyDynamics.h" />

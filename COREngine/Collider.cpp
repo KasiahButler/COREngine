@@ -22,31 +22,31 @@ COR::CollData evalColl(const Transform &lTransform, const Collider &lColl, const
 		break;
 
 	case Collider::e_Circle | Collider::e_AABB:
-		cd = COR::CollTest(lTransform.getGlobalTransform() * lColl.circle, rTransform.getGlobalTransform() * rColl.aabb);
+		cd = COR::CollTest(lTran.getGlobalTransform() * lC.circle, rTran.getGlobalTransform() * rC.aabb);
 		break;
 
 	case Collider::e_Circle | Collider::e_Ray:
-		cd = COR::CollTest(lTransform.getGlobalTransform() * lColl.circle, rTransform.getGlobalTransform() * rColl.ray);
+		cd = COR::CollTest(lTran.getGlobalTransform() * lC.circle, rTran.getGlobalTransform() * rC.ray);
 		break;
 
 	case Collider::e_Circle | Collider::e_Plane:
-		cd = COR::CollTest(lTransform.getGlobalTransform() * lColl.circle, rTransform.getGlobalTransform() * rColl.plane);
+		cd = COR::CollTest(lTran.getGlobalTransform() * lC.circle, rTran.getGlobalTransform() * rC.plane);
 		break;
 
 	case Collider::e_AABB | Collider::e_AABB:
-		cd = COR::CollTest(lTransform.getGlobalTransform() * lColl.aabb, rTransform.getGlobalTransform() * rColl.aabb);
+		cd = COR::CollTest(lTran.getGlobalTransform() * lC.aabb, rTran.getGlobalTransform() * rC.aabb);
 		break;
 
 	case Collider::e_AABB | Collider::e_Ray:
-		cd = COR::CollTest(lTransform.getGlobalTransform() * lColl.aabb, rTransform.getGlobalTransform() * rColl.ray);
+		cd = COR::CollTest(lTran.getGlobalTransform() * lC.aabb, rTran.getGlobalTransform() * rC.ray);
 		break;
 
 	case Collider::e_AABB | Collider::e_Plane:
-		cd = COR::CollTest(lTransform.getGlobalTransform() * lColl.aabb, rTransform.getGlobalTransform() * rColl.plane);
+		cd = COR::CollTest(lTran.getGlobalTransform() * lC.aabb, rTran.getGlobalTransform() * rC.plane);
 		break;
 
 	case Collider::e_Plane | Collider::e_Ray:
-		cd = COR::CollTest(lTransform.getGlobalTransform() * lColl.plane, rTransform.getGlobalTransform() * rColl.ray);
+		cd = COR::CollTest(lTran.getGlobalTransform() * lC.plane, rTran.getGlobalTransform() * rC.ray);
 		break;
 	}
 

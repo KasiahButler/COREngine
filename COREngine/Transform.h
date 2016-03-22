@@ -9,7 +9,7 @@ class Transform : public GlobalData<Transform>
 	Transform *parent;
 	std::list<Transform*> children;
 	COR::Vec2 position, scale;
-	float angle;
+	float angle = 1;
 
 public:
 	Transform();

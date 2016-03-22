@@ -34,13 +34,6 @@ namespace COR
 
 	inline AABB operator*(const Mat3 &m, const AABB &a)
 	{
-		//Vec2 pos = { m[0][0], m[1][1] };
-		//AABB hold;
-
-		//hold.position = { m[0][0], m[1][1] };
-		//hold.halfextents = a.halfextents - a.position;
-
-		//return hold;
 		Vec2 omin = a.min();
 		Vec2 omax = a.max();
 
