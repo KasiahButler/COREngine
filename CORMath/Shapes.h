@@ -26,11 +26,10 @@ namespace COR
 	struct AABB
 	{
 		Vec2 position, halfextents;
-		Vec2 min() const, max() const;
-	};
 
-	inline Vec2 AABB::min() const { return position - halfextents; }
-	inline Vec2 AABB::max() const { return position + halfextents; }
+		Vec2 min() const { return position - halfextents; }
+		Vec2 max() const { return position + halfextents; }
+	};
 
 	inline AABB operator*(const Mat3 &m, const AABB &a)
 	{

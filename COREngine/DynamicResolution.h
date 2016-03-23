@@ -17,9 +17,19 @@ class DynamicResolution : public CollSystem
 		std::cout << c.collision.depth << " cd" << std::endl;
 		std::cout << c.collision.normal.x << "," << c.collision.normal.y << " norm" << std::endl;
 
-		COR::Vec2 p1 = c.first->transform->getPosition() - mtv / 2;
-		COR::Vec2 p2 = c.second->transform->getPosition() + mtv / 2;
+		COR::Vec2 p1;
+		COR::Vec2 p2;
 
+		if (c.first->collider->shape == Collider::e_Circle)
+		{
+			p1 = c.first->transform->getPosition() - mtv / 2;
+			p2 = c.second->transform->getPosition() + mtv / 2;
+		}
+		else 
+		{
+			p1 = c.first->transform->getPosition() + mtv / 2;
+			p2 = c.second->transform->getPosition() - mtv / 2;
+		}
 		c.first->transform->setPosition(p1);
 		c.second->transform->setPosition(p2);
 
@@ -28,7 +38,8 @@ class DynamicResolution : public CollSystem
 		default:
 			break;
 		case Collider::SHAPE::e_Circle:
-			c.first->rigidbody->velocity = COR::reflect(c.first->rigidbody->velocity, c.collision.normal);
+			c.first->rigidbody->velocity = COR::reflect(c.first->transform->getPosition() / 4, c.collision.normal);
+			c.first->rigidbody->force = { 0,0 };
 			break;
 		case Collider::SHAPE::e_AABB:
 			c.first->rigidbody->velocity = -(c.first->rigidbody->velocity) / 4;
@@ -45,7 +56,7 @@ class DynamicResolution : public CollSystem
 		default:
 			break;
 		case Collider::SHAPE::e_Circle:
-			c.second->rigidbody->velocity = COR::reflect(c.second->rigidbody->velocity, c.collision.normal);
+			c.second->rigidbody->velocity = COR::reflect(c.second->transform->getPosition() / 4, c.collision.normal);
 			break;
 		case Collider::SHAPE::e_AABB:
 			c.second->rigidbody->velocity = -(c.second->rigidbody->velocity) / 4;

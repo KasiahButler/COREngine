@@ -23,14 +23,19 @@ int main()
 
 	auto e = Factory::makeBall({ 300, 300 }, { 0, 0 }, 20, 1);
 	auto f = Factory::makeSquare({ 600, 300 }, { -20, 0 }, {20, 20}, 1);
-
-	e->controller = PlayerController::make();
+	auto g = Factory::makeBall({ 200, 400 }, { 0, -20 }, 20, 1);
+	auto h = Factory::makeSquare({ 100, 400 }, { 50, 0 }, { 20, 20 }, 1);
 
 	window.init();
 	input.init();
 	time.init();
 
-	e->rigidbody->addDrag(0);
+	Asset::instance().loadTexture("Player", "../assets/link.png");
+
+	e->controller = PlayerController::make();
+	e->sprite = Sprite::make();
+	e->sprite->assetName = "Player";
+	e->sprite->dimensions = COR::Vec2{ 40, 40 };
 
 	
 	RigidbodyDynamics rDynamics;

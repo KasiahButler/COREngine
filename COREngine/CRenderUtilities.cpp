@@ -20,7 +20,7 @@ void drawTransform(const Transform &tDraw)
 void drawRigidbody(const Transform &tDraw, const Rigidbody &rDraw)
 {
 	COR::Vec2 pos = tDraw.getPosition();
-	COR::Vec2 acc = pos * rDraw.acceleration;
+	COR::Vec2 acc = pos + rDraw.acceleration;
 	COR::Vec2 vel = pos + rDraw.velocity;
 
 	sfw::drawLine(pos.x, pos.y, acc.x, acc.y, CYAN);

@@ -11,7 +11,7 @@ namespace COR
 	inline float fmax(float lhs, float rhs)
 	{
 		if (lhs > rhs) { return lhs; }
-		return lhs;
+		return rhs;
 	}
 
 	inline float fclamp(float a, float min, float max)

@@ -35,14 +35,29 @@ namespace COR
 		return cd;
 	}
 
-	CollData CollTest(const Circle &lhs, const AABB &rhs)
+	CollData CollTest(const Circle &circle, const AABB &rect)
 	{
-		Circle sqCirc = { vsnap(lhs.position, rhs.min(), rhs.max()), rhs.halfextents.x / 2 };
-		Circle circ = lhs;
+		CollData cd{ false };
 
-		if (rhs.min() < lhs.position && lhs.position < rhs.max()) { std::swap(circ, sqCirc); }
-		
-		return CollTest(circ, sqCirc);
+		auto mm = rect.min();
+		auto mx = rect.max();
+
+		auto xc = fclamp(circle.position.x, mm.x, mx.x);
+
+		Vec2 point = { xc , fclamp(circle.position.y, mm.y, mx.y) };
+		const float dist = (point - circle.position).magnitude();
+
+		Vec2 normal = { 0.0f, 0.0f };
+		if (point.x == rect.min().x) { cd.normal.x = -1.0f; }
+		else if (point.x == rect.max().x) { cd.normal.x == 1.0f; }
+
+		if (point.y == rect.min().y) { cd.normal.y = -1.0f; }
+		else if (point.y == rect.max().y) { cd.normal.y = 1.0; }
+
+		cd.depth = circle.radius - dist;
+		cd.collision = (cd.depth >= 0.0f);
+
+		return cd;
 	}
 
 	CollData CollTest(const Circle &lhs, const Plane &rhs)
