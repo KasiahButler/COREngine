@@ -40,8 +40,8 @@ int main()
 	auto &input = Input::instance();
 	auto &time = Time::instance();
 
-	auto e = Factory::makeSquare({ 300, 300 }, { 0, 0 }, {20, 20}, 1);
-	auto f = Factory::makeSquare({ 600, 300 }, { 0, 0 }, { 20, 20 }, 1);
+	auto e = Factory::makeBall({ 300, 300 }, { 0, 0 }, 20, 1);
+	auto f = Factory::makeBall({ 600, 300 }, { -20, 0 }, 20, 1);
 
 	e->controller = PlayerController::make();
 
@@ -68,9 +68,13 @@ int main()
 		cDetect.step();
 		dRes.step();
 
-		dSquare(e);
-		dSquare(f);
-		sfw::drawCircle(f->transform->getPosition().x, f->transform->getPosition().y, f->collider->aabb.halfextents.x);
+		COR::Circle tCircle = { e->transform->getPosition(), 20 };
+		COR::Circle kCircle = { f->transform->getPosition(), 20 };
+		dCircle(tCircle);
+		dCircle(kCircle);
+
+		dCircle(e->collider->circle);
+		dCircle(f->collider->circle);
 	}
 
 	time.term();

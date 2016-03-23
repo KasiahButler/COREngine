@@ -1,6 +1,8 @@
 #pragma once
 #include "CollisionDetection.h"
 
+#include <iostream>
+
 class DynamicResolution : public CollSystem
 {
 	bool condition(Collision c)
@@ -11,6 +13,9 @@ class DynamicResolution : public CollSystem
 	void update(Collision c)
 	{
 		COR::Vec2 mtv = c.collision.normal * c.collision.depth;
+
+		std::cout << c.collision.depth << " cd" << std::endl;
+		std::cout << c.collision.normal.x << "," << c.collision.normal.y << " norm" << std::endl;
 
 		COR::Vec2 p1 = c.first->transform->getPosition() + mtv / 2;
 		COR::Vec2 p2 = c.second->transform->getPosition() - mtv / 2;
@@ -26,7 +31,7 @@ class DynamicResolution : public CollSystem
 			c.first->rigidbody->velocity = COR::reflect(c.first->rigidbody->velocity, c.collision.normal);
 			break;
 		case Collider::SHAPE::e_AABB:
-			c.first->rigidbody->velocity = -(c.first->rigidbody->velocity) / 2;
+			c.first->rigidbody->velocity = -(c.first->rigidbody->velocity) / 4;
 			c.first->rigidbody->force = {0,0};
 			break;
 		case Collider::SHAPE::e_Plane:
@@ -43,7 +48,7 @@ class DynamicResolution : public CollSystem
 			c.second->rigidbody->velocity = COR::reflect(c.second->rigidbody->velocity, c.collision.normal);
 			break;
 		case Collider::SHAPE::e_AABB:
-			c.second->rigidbody->velocity = -(c.second->rigidbody->velocity) / 2;
+			c.second->rigidbody->velocity = -(c.second->rigidbody->velocity) / 4;
 			c.second->rigidbody->force = { 0,0 };
 			break;
 		case Collider::SHAPE::e_Plane:

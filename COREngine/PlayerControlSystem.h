@@ -20,12 +20,12 @@ class PlayerControlSystem : public System
 		auto &rB = *i->rigidbody;
 		float deltaT = Time::instance().getDeltaTime();
 
-		if (input.getKey(262)) i->rigidbody->addForce({50, 0});
+		if (input.getKey(con.RIGHT)) i->rigidbody->addForce({50, 0});
 
-		if (input.getKey(263)) i->rigidbody->addForce({ -50, 0 });
+		if (input.getKey(con.LEFT)) i->rigidbody->addForce({ -50, 0 });
 
-		if (input.getKey(265)) i->rigidbody->addForce({ 0, 50 });
+		if (input.getKey(con.FORWARD)) i->rigidbody->addForce({ 0, 50 });
 
-		if (input.getKey(264)) i->rigidbody->addForce({ 0, -50 });
+		if (input.getKey(con.DOWN)) i->rigidbody->addForce({ 0, -50 });
 	}
 };
