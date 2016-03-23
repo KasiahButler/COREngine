@@ -3,7 +3,9 @@
 #include "Transform.h"
 #include "Rigidbody.h"
 #include "Collider.h"
+#include "Sprite.h"
 #include "PlayerController.h"
+#include "Lifespan.h"
 
 struct Entity : GlobalData<Entity>
 {
@@ -11,6 +13,8 @@ struct Entity : GlobalData<Entity>
 	Handle<Rigidbody> rigidbody;
 	Handle<Collider> collider;
 	Handle<PlayerController> controller;
+	Handle<Sprite> sprite;
+	Handle<Lifecycle> lifecycle;
 
 	void onFree()
 	{
@@ -18,5 +22,7 @@ struct Entity : GlobalData<Entity>
 		Rigidbody::free(rigidbody.index);
 		Collider::free(collider.index);
 		PlayerController::free(controller.index);
+		Sprite::free(sprite.index);
+		Lifecycle::free(lifecycle.index);
 	}
 };

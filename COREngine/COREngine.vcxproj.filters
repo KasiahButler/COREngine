@@ -48,6 +48,12 @@
     <ClCompile Include="Collider.cpp">
       <Filter>Source Files\Components.cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Assets.cpp">
+      <Filter>Source Files\Core.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="CRenderUtilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\SFWRelease\sfwdraw.h">

@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include "Vector4.h"
+#include "Matrix3.h"
 
 namespace COR
 {
@@ -65,6 +66,8 @@ namespace COR
 	Mat4 rotateZ(float angle);
 	Mat4 translate(const Vec3 &xyz);
 	Mat4 scale(const Vec3 &xyz);
+
+	Mat4 M3toM4(const Mat3 &con, float Z);
 
 	//Output Overload for Mat4
 	std::ostream& operator<<(std::ostream &os, const Mat4 &output);

@@ -17,8 +17,8 @@ class DynamicResolution : public CollSystem
 		std::cout << c.collision.depth << " cd" << std::endl;
 		std::cout << c.collision.normal.x << "," << c.collision.normal.y << " norm" << std::endl;
 
-		COR::Vec2 p1 = c.first->transform->getPosition() + mtv / 2;
-		COR::Vec2 p2 = c.second->transform->getPosition() - mtv / 2;
+		COR::Vec2 p1 = c.first->transform->getPosition() - mtv / 2;
+		COR::Vec2 p2 = c.second->transform->getPosition() + mtv / 2;
 
 		c.first->transform->setPosition(p1);
 		c.second->transform->setPosition(p2);

@@ -10,29 +10,10 @@
 #include "CollisionDetection.h"
 #include "DynamicResolution.h"
 #include "PlayerControlSystem.h"
+#include "DebugDraw.h"
+#include "RenderSystem.h"
+#include "LifetimeSystem.h"
 #include <iostream>
-
-void drawSquare(const COR::AABB draw)
-{
-	sfw::drawLine(draw.position.x + draw.halfextents.x, draw.position.y + draw.halfextents.y, draw.position.x - draw.halfextents.x, draw.position.y + draw.halfextents.y);
-	sfw::drawLine(draw.position.x + draw.halfextents.x, draw.position.y - draw.halfextents.y, draw.position.x - draw.halfextents.x, draw.position.y - draw.halfextents.y);
-	sfw::drawLine(draw.position.x - draw.halfextents.x, draw.position.y - draw.halfextents.y, draw.position.x - draw.halfextents.x, draw.position.y + draw.halfextents.y);
-	sfw::drawLine(draw.position.x + draw.halfextents.x, draw.position.y + draw.halfextents.y, draw.position.x + draw.halfextents.x, draw.position.y - draw.halfextents.y);
-}
-
-void dSquare(const Handle<Entity> draw)
-{
-	auto d = draw->transform->getPosition();
-	sfw::drawLine(d.x + 20, d.y + 20, d.x - 20, d.y + 20);
-	sfw::drawLine(d.x + 20, d.y - 20, d.x - 20, d.y - 20);
-	sfw::drawLine(d.x - 20, d.y - 20, d.x - 20, d.y + 20);
-	sfw::drawLine(d.x + 20, d.y + 20, d.x + 20, d.y - 20);
-}
-
-void dCircle(const COR::Circle draw)
-{
-	sfw::drawCircle(draw.position.x, draw.position.y, draw.radius);
-}
 
 int main()
 {
@@ -41,7 +22,7 @@ int main()
 	auto &time = Time::instance();
 
 	auto e = Factory::makeBall({ 300, 300 }, { 0, 0 }, 20, 1);
-	auto f = Factory::makeBall({ 600, 300 }, { -20, 0 }, 20, 1);
+	auto f = Factory::makeSquare({ 600, 300 }, { -20, 0 }, {20, 20}, 1);
 
 	e->controller = PlayerController::make();
 
@@ -51,30 +32,29 @@ int main()
 
 	e->rigidbody->addDrag(0);
 
+	
 	RigidbodyDynamics rDynamics;
 	CollDetection cDetect;
 	DynamicResolution dRes;
 	PlayerControlSystem pCon;
+	LifetimeSystem lSystem;
+	RenderSystem rendSystem;
+	DebugDraw dBDraw;
 
 	while (window.step())
 	{
 		input.step();
 		time.step();
 
+		dBDraw.step();
 		pCon.step();
 
 		rDynamics.step();
+		lSystem.step();
 
 		cDetect.step();
 		dRes.step();
-
-		COR::Circle tCircle = { e->transform->getPosition(), 20 };
-		COR::Circle kCircle = { f->transform->getPosition(), 20 };
-		dCircle(tCircle);
-		dCircle(kCircle);
-
-		dCircle(e->collider->circle);
-		dCircle(f->collider->circle);
+		rendSystem.step();
 	}
 
 	time.term();

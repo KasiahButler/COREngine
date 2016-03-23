@@ -111,6 +111,14 @@ namespace COR
 		return hold;
 	}
 
+	Mat4 M3toM4(const Mat3 &con, float Z)
+	{
+		return{ con.cell[0], con.cell[1], 0, con.cell[2],
+				con.cell[3], con.cell[4], 0, con.cell[5],
+				0, 0, 1, 0,
+				con.cell[6], con.cell[7], Z, con.cell[8] };
+	}
+
 	//Output Operator Overload for Mat4
 	std::ostream& operator<<(std::ostream &os, const Mat4 &output)
 	{
