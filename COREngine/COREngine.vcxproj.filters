@@ -125,5 +125,8 @@
     <ClInclude Include="PlayerControlSystem.h">
       <Filter>Header Files\Systems.h</Filter>
     </ClInclude>
+    <ClInclude Include="StaticResolution.h">
+      <Filter>Header Files\Systems.h</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

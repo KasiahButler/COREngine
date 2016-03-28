@@ -7,12 +7,6 @@ COR::CollData evalColl(const Transform &lTransform, const Collider &lColl, const
 	Collider lC = lColl;
 	Collider rC = rColl;
 
-	if (lC.shape > rC.shape)
-	{
-		std::swap(lTran, rTran);
-		std::swap(lC, rC);
-	}
-
 	COR::CollData cd;
 
 	switch (lC.shape | rC.shape)

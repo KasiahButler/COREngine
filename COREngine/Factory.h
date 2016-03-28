@@ -35,4 +35,19 @@ public:
 
 		return e;
 	}
+
+	static Handle<Entity> makePlane(COR::Vec2 pos, COR::Vec2 normal)
+	{
+		auto e = Entity::make();
+		e->collider = Collider::make();
+		e->transform = Transform::make();
+
+		e->transform->setAngle(normal.angle());
+
+		e->collider->plane.normal = COR::Vec2{ 1, 0 };
+		e->collider->shape = Collider::e_Plane;
+		e->transform->setPosition(pos);
+
+		return e;
+	}
 };

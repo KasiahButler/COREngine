@@ -28,8 +28,8 @@ namespace COR
 	{
 		CollData cd;
 
-		cd.normal = (rhs.position - lhs.position).normal();
-		cd.depth = (rhs.radius + lhs.radius) - (rhs.position - lhs.position).magnitude();
+		cd.normal = (lhs.position - rhs.position).normal();
+		cd.depth = (lhs.radius + rhs.radius) - (rhs.position - lhs.position).magnitude();
 		cd.collision = cd.depth > 0;
 
 		return cd;
@@ -43,16 +43,16 @@ namespace COR
 		auto mx = rect.max();
 
 		auto xc = fclamp(circle.position.x, mm.x, mx.x);
+		auto yc = fclamp(circle.position.y, mm.y, mx.y);
 
-		Vec2 point = { xc , fclamp(circle.position.y, mm.y, mx.y) };
+		Vec2 point = { xc , yc };
 		const float dist = (point - circle.position).magnitude();
 
-		Vec2 normal = { 0.0f, 0.0f };
-		if (point.x == rect.min().x) { cd.normal.x = -1.0f; }
-		else if (point.x == rect.max().x) { cd.normal.x == 1.0f; }
+		if (point.x == mm.x) { cd.normal.x = -1.0f; }
+		else if (point.x == mx.x) { cd.normal.x == 1.0f; }
 
-		if (point.y == rect.min().y) { cd.normal.y = -1.0f; }
-		else if (point.y == rect.max().y) { cd.normal.y = 1.0; }
+		if (point.y == mm.y) { cd.normal.y = -1.0f; }
+		else if (point.y == mx.y) { cd.normal.y = 1.0f; }
 
 		cd.depth = circle.radius - dist;
 		cd.collision = (cd.depth >= 0.0f);

@@ -40,6 +40,13 @@ void drawCircle(const COR::Circle &cDraw, unsigned TINT)
 	sfw::drawCircle(cDraw.position.x, cDraw.position.y, cDraw.radius, 6, TINT);
 }
 
+void drawPlane(const COR::Plane &pPlane, unsigned TINT = BLUE)
+{
+	sfw::drawLine(pPlane.position.x, pPlane.position.y, pPlane.position.x + pPlane.normal.x * 100, pPlane.position.y + pPlane.normal.y * 100, MAGENTA);
+	sfw::drawLine(pPlane.position.x - (pPlane.normal.perpendicular().x * 1000), pPlane.position.y - (pPlane.normal.perpendicular().y * 1000), pPlane.position.x, pPlane.position.y, TINT);
+	sfw::drawLine(pPlane.position.x + (pPlane.normal.perpendicular().x * 1000), pPlane.position.y + (pPlane.normal.perpendicular().y * 1000), pPlane.position.x, pPlane.position.y, TINT);
+}
+
 void drawCollider(const Transform &tDraw, const Collider &cDraw)
 {
 	switch (cDraw.shape)
@@ -49,6 +56,9 @@ void drawCollider(const Transform &tDraw, const Collider &cDraw)
 		break;
 	case Collider::e_AABB:
 		drawAABB(tDraw.getGlobalTransform() * cDraw.aabb, BLUE);
+		break;
+	case Collider::e_Plane:
+		drawPlane(tDraw.getGlobalTransform() * cDraw.plane, BLUE);
 		break;
 	}
 }

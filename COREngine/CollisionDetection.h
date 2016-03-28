@@ -43,7 +43,18 @@ class CollDetection : public BinarySystem
 
 	void update(Handle<Entity> lhs, Handle<Entity> rhs)
 	{
-		auto cd = evalColl(*lhs->transform, *lhs->collider, *rhs->transform, *rhs->collider);
+		Transform lTran = *lhs->transform;
+		Transform rTran = *rhs->transform;
+		Collider lC = *lhs->collider;
+		Collider rC = *rhs->collider;
+
+		if (lC.shape > rC.shape)
+		{
+			std::swap(lTran, rTran);
+			std::swap(lC, rC);
+		}
+
+		auto cd = evalColl(lTran, lC, rTran, rC);
 
 		if (cd.collision)
 			Collision::getData().push_back(Collision{ lhs, rhs, cd });
